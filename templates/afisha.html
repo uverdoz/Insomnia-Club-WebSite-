@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script src="{{ url_for('static', filename='js/afisha_3d.js') }}"></script>
+
+<div class="afisha-wrapper">
+
+    <div class="afisha-title">POSTER</div>
+
+    <!-- 1) Karaoke-Dance -->
+    <div class="afisha-card">
+        <div class="afisha-title-small">Karaoke-Dance</div>
+        <div class="afisha-days">Четверг — Воскресенье</div>
+        <div class="afisha-time">Начало в 20:00</div>
+        <div class="afisha-desc">
+            Атмосфера для душевного отдыха: свободная сцена, любимые хиты, уютный вечер.
+            Идеально для компаний и спокойного отдыха.
+        </div>
+
+        <a class="afisha-btn" href="/booking">Забронировать стол</a>
+    </div>
+
+
+    <!-- 2) Night Club -->
+    <div class="afisha-card">
+        <div class="afisha-title-small">Night Club</div>
+        <div class="afisha-days">Пятница — Суббота</div>
+        <div class="afisha-time">23:00 — 05:00</div>
+        <div class="afisha-desc">
+            Танцевальная атмосфера, pop & dance, DJ-резиденты клуба. Световое шоу, дым, лазеры.
+            Энергия ночного города.
+        </div>
+
+        <a class="afisha-btn" href="/booking">Забронировать стол</a>
+    </div>
+
+
+    <!-- 3) Live Concert -->
+    <div class="afisha-card">
+        <div class="afisha-title-small">Live Concert</div>
+        <div class="afisha-days">Каждую Пятницу и Субботу</div>
+        <div class="afisha-time">23:00 — 00:30</div>
+        <div class="afisha-desc">
+            В клубе проходят живые выступления групп. Следите за обновлениями —
+            информацию мы публикуем заранее.
+        </div>
+
+        <a class="afisha-btn" href="/booking">Забронировать стол</a>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="afisha-container">
+    <h1 class="afisha-title">Статистика бронирований</h1>
+
+    <div class="stat-block">
+        <h2>Бронирования по дням</h2>
+        <table class="stat-table">
+            <tr>
+                <th>День</th>
+                <th>Количество броней</th>
+            </tr>
+            {% for day, count in stats.items() %}
+            <tr>
+                <td>{{ day }}</td>
+                <td>{{ count }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

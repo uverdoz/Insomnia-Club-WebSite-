@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .admin-login-box {
+        margin: 120px auto;
+        max-width: 380px;
+        padding: 35px 30px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        text-align: center;
+        backdrop-filter: blur(6px);
+    }
+
+    .admin-login-box h2 {
+        color: #8dff3f;
+        font-size: 32px;
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px #8dff3f;
+    }
+
+    .admin-login-box input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 14px;
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+    }
+
+    .admin-login-box button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 6px;
+        border-radius: 8px;
+        background: #8dff3f;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        color: #000;
+        font-weight: 700;
+        transition: .2s ease;
+    }
+
+    .admin-login-box button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 18px #8dff3f;
+    }
+
+    .error-msg {
+        color: #ff4d4d;
+        margin-top: 10px;
+    }
+</style>
+
+
+<div class="admin-login-box">
+    <h2>Вход в админку</h2>
+
+    <form method="POST">
+        <input type="password" name="password" placeholder="Пароль администратора">
+        <button type="submit">Войти</button>
+
+        {% if error %}
+        <div class="error-msg">{{ error }}</div>
+        {% endif %}
+    </form>
+</div>
+
+{% endblock %}

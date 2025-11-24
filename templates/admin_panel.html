@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .admin-panel {
+        max-width: 1100px;
+        margin: 80px auto 120px;
+        padding: 0 20px;
+    }
+
+    .admin-title {
+        font-size: 46px;
+        margin-bottom: 35px;
+        text-align: center;
+        color: #8dff3f;
+        text-shadow: 0 0 10px #8dff3f;
+    }
+
+
+    .res-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .res-table th,
+    .res-table td {
+        padding: 14px 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .res-table th {
+        color: #8dff3f;
+        font-size: 18px;
+        text-shadow: 0 0 8px #8dff3f;
+    }
+
+    .res-table td {
+        font-size: 15px;
+        opacity: 0.9;
+    }
+
+    .cancel-btn {
+        padding: 7px 14px;
+        background: #ff3b8a;
+        border: none;
+        border-radius: 6px;
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+        transition: .2s ease;
+    }
+
+    .cancel-btn:hover {
+        background: #ff155c;
+        box-shadow: 0 0 12px #ff3b8a;
+    }
+
+    .no-reservations {
+        text-align: center;
+        opacity: 0.7;
+        margin-top: 40px;
+        font-size: 18px;
+    }
+
+    .btn-download {
+        display: inline-block;
+        background: #8dff3f;
+        color: #000;
+        padding: 10px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        margin-bottom: 18px;
+        transition: 0.25s;
+    }
+
+    .btn-download:hover {
+        background: #aaff60;
+    }
+</style>
+
+
+<div class="admin-panel">
+
+    <h1 class="admin-title">Админка — Бронирование (бля буду)</h1>
+
+    {% if reservations|length == 0 %}
+    <div class="no-reservations">
+        Пока нет броней.
+    </div>
+    {% else %}
+
+    <a href="{{ url_for('admin_download') }}" class="btn-download" download>
+        📥 Скачать брони (Excel)
+    </a>
+
+    <a href="{{ url_for('admin_stats') }}" class="admin-btn">📊 Статистика броней</a>
+
+    <table class="res-table">
+        <tr>
+            <th>Стол</th>
+            <th>Имя</th>
+            <th>Телефон</th>
+            <th>Время</th>
+            <th>Заметка</th>
+            <th>Действие</th>
+        </tr>
+
+        {% for table_id, info in reservations.items()|sort %}
+        <tr>
+            <td><b>{{ table_id }}</b></td>
+            <td>{{ info.name }}</td>
+            <td>{{ info.phone }}</td>
+            <td>{{ info.time }}</td>
+            <td>{{ info.note or "—" }}</td>
+
+            <td>
+                <form action="/admin/cancel" method="POST" style="display:inline;">
+                    <input type="hidden" name="table_id" value="{{ table_id }}">
+                    <button class="cancel-btn">Отменить</button>
+                </form>
+            </td>
+        </tr>
+
+        <input type="text" id="reservationSearch" placeholder="Поиск по имени или телефону..." style="
+        width: 100%;
+        padding: 10px 14px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        border: 1px solid #444;
+        background:#111;
+        color:white;
+        font-size:16px;">
+        {% endfor %}
+    </table>
+
+    <script>
+        document.getElementById("reservationSearch").addEventListener("input", function () {
+            const value = this.value.toLowerCase();
+            const rows = document.querySelectorAll(".reservations-table tbody tr");
+
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(value) ? "" : "none";
+            });
+        });
+    </script>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

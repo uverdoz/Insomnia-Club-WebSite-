@@ -1,0 +1,842 @@
+/* booking.css — стили для страницы бронирования */
+
+/* общие контейнеры */
+
+
+.booking-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 40px auto 80px;
+    color: white;
+    text-align: center;
+    min-height: 680px;
+}
+
+.booking-title {
+    font-size: 40px;
+    margin-bottom: 8px
+}
+
+/* легенда */
+.legend {
+    margin-bottom: 16px;
+    font-size: 14px;
+    opacity: 0.9
+}
+
+.free-dot,
+.busy-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 8px 0 10px;
+    vertical-align: middle;
+}
+
+.free-dot {
+    background: #34d058
+}
+
+.busy-dot {
+    background: #ff4d4d
+}
+
+/* переключатель этажей */
+.floor-switch {
+    margin: 12px 0 30px;
+}
+
+.floor-switch button {
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #111;
+    color: #fff;
+    margin: 0 8px;
+    cursor: pointer;
+}
+
+.floor-switch .active-floor {
+    background: #ff4db8;
+    color: #fff;
+    border-color: #ff4db8;
+}
+
+
+.floor {
+    position: relative;
+    width: 100%;
+    height: 560px;
+    display: none;
+}
+
+.active-floor-block {
+    display: block;
+}
+
+/* затемнение (класс добавляется JS) */
+.dimmed {
+    filter: blur(10px) brightness(0.45);
+    pointer-events: none;
+}
+
+/* общие стили для столов */
+/* table — базовый вид */
+/* Блок-рамка стола — НЕ движется */
+.table {
+    width: 190px;
+    height: 60px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+/* Сам текст — будет плавно увеличиваться */
+.table span {
+    display: inline-block;
+    transition: transform 1s ease;
+    transform-origin: center center;
+}
+
+/* Hover — увеличивается только текст */
+.table:hover span {
+    transform: scale(1.80);
+    /* плавное увеличение */
+}
+
+/* Hover — фон чуть светлее */
+.table:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* VIP */
+.vip {
+    width: 240px;
+    height: 88px;
+    border-radius: 12px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    border: 2px solid #ff4db8;
+    background: rgba(255, 77, 184, 0.06);
+}
+
+.bar {
+    width: 200px;
+    height: 120px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    font-size: 26px;
+    font-weight: 700;
+}
+
+/* ---- РЕЗИНА: позиции в процентах (подгоняй при необходимости) ---- */
+/* Центрируем BAR */
+.bar {
+    left: 50%;
+    top: 240px;
+    transform: translateX(-50%);
+}
+
+/* VIPs */
+.vip2 {
+    left: 18%;
+    top: 18px;
+    transform: translateX(-50%)
+}
+
+.vip3 {
+    left: 82%;
+    top: 18px;
+    transform: translateX(-50%)
+}
+
+.vip1 {
+    left: 18%;
+    top: 460px;
+    transform: translateX(-50%)
+}
+
+/* 1 этаж столбы */
+.t3 {
+    left: 18%;
+    top: 150px;
+    transform: translateX(-50%)
+}
+
+.t2 {
+    left: 18%;
+    top: 250px;
+    transform: translateX(-50%)
+}
+
+.t1 {
+    left: 18%;
+    top: 350px;
+    transform: translateX(-50%)
+}
+
+.t4 {
+    left: 82%;
+    top: 150px;
+    transform: translateX(-50%)
+}
+
+.t5 {
+    left: 82%;
+    top: 250px;
+    transform: translateX(-50%)
+}
+
+.t6 {
+    left: 82%;
+    top: 350px;
+    transform: translateX(-50%)
+}
+
+/* 2 этаж (балкон) */
+.b23 {
+    left: 28%;
+    top: 60px;
+    transform: translateX(-50%)
+}
+
+.b22 {
+    left: 28%;
+    top: 160px;
+    transform: translateX(-50%)
+}
+
+.b21 {
+    left: 28%;
+    top: 260px;
+    transform: translateX(-50%)
+}
+
+.b24 {
+    left: 72%;
+    top: 60px;
+    transform: translateX(-50%)
+}
+
+.b25 {
+    left: 72%;
+    top: 160px;
+    transform: translateX(-50%)
+}
+
+.b26 {
+    left: 72%;
+    top: 260px;
+    transform: translateX(-50%)
+}
+
+.b28 {
+    left: 52%;
+    top: 460px;
+    transform: translateX(-50%)
+}
+
+.b27 {
+    left: 72%;
+    top: 460px;
+    transform: translateX(-50%)
+}
+
+/* Модалка (динамически создаётся в booking.js) */
+.modal-bg {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 20000;
+    /* <- поднял */
+    pointer-events: auto;
+    /* чтобы клики работали на фоне и на модалке */
+}
+
+/* сам диалог внутри фонового слоя */
+.modal {
+    position: relative;
+    /* важно */
+    z-index: 20001;
+    /* <- выше чем фон и почти наверху страницы */
+    background: #0f1414;
+    padding: 18px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    min-width: 320px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.modal input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+    color: #fff;
+}
+
+.modal button {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #111;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* КРЕСТИК — отмечает занятый стол */
+.table.booked {
+    background: rgba(255, 0, 128, 0.15);
+    border-color: #ff0000;
+    cursor: not-allowed;
+    opacity: 0.95;
+}
+
+.table.booked::after {
+    content: "✕";
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    width: 26px;
+    height: 26px;
+    background: #ff0000;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 16px;
+}
+
+/* ===========================
+   ДЫМКА ANIMATED BACKGROUND
+=========================== */
+
+.booking-container {
+    position: relative;
+    z-index: 2;
+}
+
+.smoke-bg {
+    position: fixed;
+    inset: 0;
+    background: url("/static/images/smoke.jpg") center/cover;
+    opacity: 0.18;
+    z-index: 0;
+    filter: saturate(0%) brightness(40%);
+    pointer-events: none;
+    animation: smokeMove 26s ease-in-out infinite alternate;
+}
+
+@keyframes smokeMove {
+    0% {
+        transform: scale(1) translateY(0px);
+        opacity: 0.12;
+    }
+
+    50% {
+        transform: scale(1.05) translateY(-20px);
+        opacity: 0.20;
+    }
+
+    100% {
+        transform: scale(1.1) translateY(20px);
+        opacity: 0.15;
+    }
+}
+
+@keyframes smokeMove {
+    0% {
+        transform: scale(1) translateY(0);
+        opacity: 0.12;
+    }
+
+    50% {
+        transform: scale(1.05) translateY(-20px);
+        opacity: 0.20;
+    }
+
+    100% {
+        transform: scale(1.1) translateY(20px);
+        opacity: 0.15;
+    }
+}
+
+/* чтобы всё поверх дымки */
+.booking-container {
+    position: relative;
+    z-index: 2;
+}
+
+/* ----------- НЕОНОВАЯ КОМНАТА / СТЕНЫ ----------- */
+
+.room-outline {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 86%;
+    height: 88%;
+    transform: translate(-50%, -50%);
+    border: 2px solid rgba(255, 255, 255, 0.07);
+    border-radius: 14px;
+    box-shadow: 0 0 22px rgba(255, 77, 184, 0.15) inset;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Обводка бара (остров как на плане) */
+.bar-outline {
+    position: absolute;
+    left: 50%;
+    top: 240px;
+    width: 300px;
+    height: 160px;
+    transform: translateX(-50%);
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 0 28px rgba(255, 255, 255, 0.12) inset;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ----------- НЕОН ДЛЯ VIP ----------- */
+.vip {
+    border-color: #ff4db8 !important;
+    box-shadow: 0 0 14px rgba(255, 77, 184, 0.45);
+}
+
+/* ----------- НАДПИСИ ЗОН ----------- */
+
+.zone-text {
+    position: absolute;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    opacity: 0.13;
+    color: white;
+    pointer-events: none;
+    text-transform: uppercase;
+}
+
+/* DJ зона сверху */
+.zone-dj {
+    left: 50%;
+    top: 80px;
+    transform: translateX(-50%);
+}
+
+/* Танцпол под баром */
+.zone-dance {
+    left: 50%;
+    top: 355px;
+    transform: translateX(-50%);
+}
+
+
+/* =======================================================
+   booking.css — улучшенный, мягкий, клубный дизайн
+========================================================== */
+
+/* ===========================
+   ГЛОБАЛЬНЫЙ FON / POL
+=========================== */
+
+body {
+    background: #050505;
+    /* глубокий тёмный фон */
+    overflow-x: hidden;
+}
+
+.smoke-bg {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url("/static/images/smoke.jpg") center/cover;
+    opacity: 0.12;
+    filter: brightness(45%) saturate(0%);
+    pointer-events: none;
+    z-index: 0;
+
+    animation: smokeFloat 32s ease-in-out infinite alternate;
+}
+
+@keyframes smokeFloat {
+    0% {
+        transform: scale(1) translateY(0);
+        opacity: 0.10;
+    }
+
+    50% {
+        transform: scale(1.04) translateY(-18px);
+        opacity: 0.14;
+    }
+
+    100% {
+        transform: scale(1.08) translateY(16px);
+        opacity: 0.12;
+    }
+}
+
+/* ===========================
+   ОСНОВНОЙ КОНТЕЙНЕР
+=========================== */
+
+.booking-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 40px auto 80px;
+    color: white;
+    text-align: center;
+    min-height: 700px;
+
+    opacity: 0;
+    animation: fadeIn 1.8s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.booking-title {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+/* ===========================
+   ПОЛ — мягкая тень под схемой
+=========================== */
+
+.floor-shadow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 90%;
+    height: 88%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle at center,
+            rgba(255, 255, 255, 0.04) 0%,
+            rgba(0, 0, 0, 0.9) 65%);
+    z-index: 0;
+    pointer-events: none;
+    border-radius: 40px;
+}
+
+/* ===========================
+   СТЕНЫ (НЕОНОВАЯ КОМНАТА)
+=========================== */
+
+.room-outline {
+    position: absolute;
+    left: 50%;
+    top: 52%;
+    width: 90%;
+    height: 86%;
+    transform: translate(-50%, -50%);
+    border-radius: 22px;
+
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+        0 0 25px rgba(255, 255, 255, 0.08) inset,
+        0 0 45px rgba(0, 0, 0, 0.9);
+
+    pointer-events: none;
+    z-index: 1;
+
+    opacity: 0;
+    animation: wallsFade 2.4s ease forwards 0.6s;
+}
+
+@keyframes wallsFade {
+    to {
+        opacity: 1;
+    }
+}
+
+/* ===========================
+   ЛЕГЕНДА / ЭТАЖИ
+=========================== */
+
+.legend {
+    margin-bottom: 16px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.free-dot,
+.busy-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 8px 0 12px;
+}
+
+.free-dot {
+    background: #3ad05a;
+}
+
+.busy-dot {
+    background: #ff5555;
+}
+
+.floor-switch button {
+    padding: 10px 18px;
+    background: #111;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: white;
+}
+
+.active-floor {
+    background: #ff4db8;
+    border-color: #ff4db8;
+}
+
+/* ===========================
+   1 ЭТАЖ БАЗОВЫЙ LAYOUT
+=========================== */
+
+.floor {
+    position: relative;
+    width: 100%;
+    height: 560px;
+    display: none;
+    z-index: 2;
+}
+
+.active-floor-block {
+    display: block;
+}
+
+/* ===========================
+   СТОЛЫ, VIP и BAR
+=========================== */
+
+.table {
+    width: 190px;
+    height: 60px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 3;
+
+    transition: background .25s ease, box-shadow .25s ease;
+}
+
+.table:hover {
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.18);
+}
+
+.vip {
+    width: 240px;
+    height: 86px;
+    border: 1px solid #ff4db8;
+    background: rgba(255, 77, 184, 0.08);
+    border-radius: 14px;
+    box-shadow:
+        0 0 30px rgba(255, 77, 184, 0.12),
+        0 0 14px rgba(255, 77, 184, 0.4) inset;
+    z-index: 3;
+}
+
+/* BAR */
+.bar {
+    width: 200px;
+    height: 120px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 26px;
+    font-weight: 700;
+    z-index: 3;
+}
+
+/* ===========================
+   DANCEFLOOR TEXT (плавный)
+=========================== */
+
+
+/* ===========================
+   НЕ ТРОГАЕМ РАССТАНОВКУ СТОЛОВ
+=========================== */
+
+/* VIP */
+.vip2 {
+    left: 18%;
+    top: 18px;
+    transform: translateX(-50%);
+}
+
+.vip3 {
+    left: 82%;
+    top: 18px;
+    transform: translateX(-50%);
+}
+
+.vip1 {
+    left: 18%;
+    top: 460px;
+    transform: translateX(-50%);
+}
+
+/* столы 1 этажа */
+.t3 {
+    left: 18%;
+    top: 150px;
+    transform: translateX(-50%);
+}
+
+.t2 {
+    left: 18%;
+    top: 250px;
+    transform: translateX(-50%);
+}
+
+.t1 {
+    left: 18%;
+    top: 350px;
+    transform: translateX(-50%);
+}
+
+.t4 {
+    left: 82%;
+    top: 150px;
+    transform: translateX(-50%);
+}
+
+.t5 {
+    left: 82%;
+    top: 250px;
+    transform: translateX(-50%);
+}
+
+.t6 {
+    left: 82%;
+    top: 350px;
+    transform: translateX(-50%);
+}
+
+/* балкон */
+.b23 {
+    left: 28%;
+    top: 60px;
+    transform: translateX(-50%);
+}
+
+.b22 {
+    left: 28%;
+    top: 160px;
+    transform: translateX(-50%);
+}
+
+.b21 {
+    left: 28%;
+    top: 260px;
+    transform: translateX(-50%);
+}
+
+.b24 {
+    left: 72%;
+    top: 60px;
+    transform: translateX(-50%);
+}
+
+.b25 {
+    left: 72%;
+    top: 160px;
+    transform: translateX(-50%);
+}
+
+.b26 {
+    left: 72%;
+    top: 260px;
+    transform: translateX(-50%);
+}
+
+.b28 {
+    left: 52%;
+    top: 460px;
+    transform: translateX(-50%);
+}
+
+.b27 {
+    left: 72%;
+    top: 460px;
+    transform: translateX(-50%);
+}
+
+
+/* ---------------------------------------------------
+      НЕОНОВАЯ КОМНАТА — РАСШИРЕННАЯ ПОД ТВОИ СТОЛЫ
+   --------------------------------------------------- */
+
+/* Внешняя рамка */
+.room-outline {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 87%;
+    /* было 86% — расширил */
+    height: 99%;
+    /* было 88% — увеличил */
+    transform: translate(-50%, -50%);
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    box-shadow:
+        0 0 40px rgba(255, 255, 255, 0.10) inset,
+        0 0 30px rgba(255, 77, 184, 0.20);
+    pointer-events: none;
+    z-index: 1;
+    backdrop-filter: blur(2px);
+}
+
+/* Внутренняя линия */
+.room-inner-line {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 88%;
+    /* было 82% */
+    height: 88%;
+    /* было 84% */
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.7;
+}

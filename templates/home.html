@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+    
+    <div class="slider">
+        <!-- добавь свои фото в /static/images/slide1.jpg ... slide7.jpg -->
+        <img class="slide active" src="{{ url_for('static', filename='images/slide1.jpg') }}" alt="">
+        <img class="slide" src="{{ url_for('static', filename='images/slide2.jpg') }}" alt="">
+        <img class="slide" src="{{ url_for('static', filename='images/slide3.jpg') }}" alt="">
+        <img class="slide" src="{{ url_for('static', filename='images/slide4.jpg') }}" alt="">
+        <img class="slide" src="{{ url_for('static', filename='images/slide5.jpg') }}" alt="">
+        <img class="slide" src="{{ url_for('static', filename='images/slide6.jpg') }}" alt="">
+        <img class="slide" src="{{ url_for('static', filename='images/slide7.jpg') }}" alt="">
+        <img class="slide" src="{{ url_for('static', filename='images/slide8.jpg') }}" alt="">
+        <img class="slide" src="{{ url_for('static', filename='images/slide9.jpg') }}" alt="">
+
+        <!-- при желании добавь до 7 слайдов -->
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+        <h1>INSOMNIA</h1>
+        <p>Nightclub • Parties • Beats</p>
+    </div>
+</section>
+<section class="about-section">
+    <div class="container">
+        <h2>О клубе Insomnia</h2>
+        <p>
+            Insomnia — ночной клуб, где звучат лучшие сэт-подборки от резидентов и приглашённых DJ.
+            Мощный звук, качественный свет, VIP-комнаты и уникальная атмосфера.
+        </p>
+    </div>
+</section>
+
+<section class="contacts-section">
+    <h1 class="contacts-title">Как нас найти</h1>
+
+    <div class="map-wrapper">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2797.7808574755316!2d76.93992731585215!3d52.28967977977144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x424cddb91fc1541b%3A0x298f56144c12d75d!2sAbaya%2079%2C%20Pavlodar%20090000!5e0!3m2!1sen!2skz!4v1739962000000!5m2!1sen!2skz"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+
+    <div class="route-btn-box">
+        <a class="route-btn" href="https://www.google.com/maps/dir/?api=1&destination=Павлодар,+Абая+79"
+            target="_blank">
+            Проложить маршрут
+        </a>
+    </div>
+</section>
+
+
+<div id="faq" class="faq-block">
+
+    <h2>FAQ — Частые вопросы</h2>
+
+    <div class="faq-item">
+        <h3>Какой у вас возрастной лимит?</h3>
+        <p>Вход: <strong>W 18+ / M 23+</strong>. Паспорт обязателен.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Есть ли dress code и face control?</h3>
+        <p>Да, действует <strong>DC / FC</strong>. Мы можем отказать во входе, если стиль одежды или поведение не
+            соответствует формату заведения.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Есть ли бонусы для именинников?</h3>
+        <p>Да! <strong>+20% кэшбэк</strong> от суммы депозита при предъявлении документа.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Нужна ли предоплата для брони стола?</h3>
+        <p>В выходные и на выступления артистов — обязательна. В будние дни обсуждается индивидуально.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Что входит в депозит?</h3>
+        <p>Бронь на ночь, обслуживание и сумма, которая полностью тратится по меню бара/кухни.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Можно ли входить/выходить по нескольку раз?</h3>
+        <p>Да, по штампу или браслету. При утере повторный вход невозможен.</p>
+    </div>
+
+    <div class="faq-item">
+        <h3>Можно ли принести свои напитки?</h3>
+        <p>Нет, вход со своими напитками запрещён.</p>
+    </div>
+
+</div>
+
+<div class="contacts-block">
+    <h2>Контакты</h2>
+
+    <a href="tel:+77717979795" class="contact-btn call-btn">
+        WhatsApp: +7 771 797 9795
+    </a>
+
+    <a href="https://t.me/+8mstn6hOt4c5YzEy" target="_blank" class="contact-btn tg-btn">
+        Telegram канал
+    </a>
+
+    <div id="contacts" class="work-time">
+        <strong>Время работы:</strong><br>
+        Пятница: 20:00 — 4:00<br>
+        Суббота: 20:00 — 5:00<br>
+        Чт-Вc: 20:00 - 4:00
+    </div>
+</div>
+
+<div class="live-counter-block">
+    <div class="live-counter-title">Сейчас в клубе:</div>
+    <div class="live-counter-number" id="liveCounter">0</div>
+</div>
+
+{% endblock %}

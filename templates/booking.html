@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="smoke-bg"></div>
+
+<div class="booking-container">
+
+    <h1 class="booking-title">Бронирование столов</h1>
+
+    <div class="legend">
+        <span class="free-dot"></span> Свободен
+        <span class="busy-dot"></span> Занят
+    </div>
+
+    <div class="floor-switch">
+        <button id="floor1Btn" class="active-floor">1 этаж</button>
+        <button id="floor2Btn">2 этаж (балкон)</button>
+    </div>
+
+    <!-- =======================
+         1 ЭТАЖ
+    ======================= -->
+    <div id="floor1" class="floor active-floor-block">
+        <div class="room-outline"></div>
+        <div class="room-inner-line"></div>
+
+        <!-- VIP слева верх -->
+        <div class="table vip vip2 {% if reservations.get('VIP2') is not none %}booked{% endif %}" data-table="VIP2">
+            <span>VIP 2</span>
+        </div>
+
+        <!-- Левый ряд -->
+        <div class="table t3 {% if reservations.get('3') is not none %}booked{% endif %}" data-table="3">
+            <span>3</span>
+        </div>
+        <div class="table t2 {% if reservations.get('2') is not none %}booked{% endif %}" data-table="2">
+            <span>2</span>
+        </div>
+        <div class="table t1 {% if reservations.get('1') is not none %}booked{% endif %}" data-table="1">
+            <span>1</span>
+        </div>
+
+        <!-- Центральный бар -->
+        <div class="bar">BAR</div>
+
+        <!-- VIP справа -->
+        <div class="table vip vip3 {% if reservations.get('VIP3') is not none %}booked{% endif %}" data-table="VIP3">
+            <span>VIP 3</span>
+        </div>
+
+        <!-- Правый ряд -->
+        <div class="table t4 {% if reservations.get('4') is not none %}booked{% endif %}" data-table="4">
+            <span>4</span>
+        </div>
+        <div class="table t5 {% if reservations.get('5') is not none %}booked{% endif %}" data-table="5">
+            <span>5</span>
+        </div>
+        <div class="table t6 {% if reservations.get('6') is not none %}booked{% endif %}" data-table="6">
+            <span>6</span>
+        </div>
+
+        <!-- VIP снизу слева -->
+        <div class="table vip vip1 {% if reservations.get('VIP1') is not none %}booked{% endif %}" data-table="VIP1">
+            <span>VIP 1</span>
+        </div>
+
+    </div>
+
+    <!-- =======================
+         2 ЭТАЖ
+    ======================= -->
+    <div id="floor2" class="floor">
+
+
+        <!-- Левый ряд (23–21) -->
+        <div class="table b23 {% if reservations.get('23') is not none %}booked{% endif %}" data-table="23">
+            <span>23</span>
+        </div>
+        <div class="table b22 {% if reservations.get('22') is not none %}booked{% endif %}" data-table="22">
+            <span>22</span>
+        </div>
+        <div class="table b21 {% if reservations.get('21') is not none %}booked{% endif %}" data-table="21">
+            <span>21</span>
+        </div>
+
+        <!-- Правый ряд (24–26) -->
+        <div class="table b24 {% if reservations.get('24') is not none %}booked{% endif %}" data-table="24">
+            <span>24</span>
+        </div>
+        <div class="table b25 {% if reservations.get('25') is not none %}booked{% endif %}" data-table="25">
+            <span>25</span>
+        </div>
+        <div class="table b26 {% if reservations.get('26') is not none %}booked{% endif %}" data-table="26">
+            <span>26</span>
+        </div>
+
+        <!-- Нижние справа (27–28) -->
+        <div class="table b27 {% if reservations.get('27') is not none %}booked{% endif %}" data-table="27">
+            <span>27</span>
+        </div>
+        <div class="table b28 {% if reservations.get('28') is not none %}booked{% endif %}" data-table="28">
+            <span>28</span>
+        </div>
+
+    </div>
+
+    <div id="booking-result" style="margin-top:20px; text-align:center;"></div>
+
+</div>
+
+<script>
+    const serverReservations = JSON.parse('{{ reservations | tojson | safe }}');
+</script>
+
+<script src="{{ url_for('static', filename='js/booking.js') }}"></script>
+
+
+{% endblock %}

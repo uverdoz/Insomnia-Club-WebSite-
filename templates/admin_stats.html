@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="afisha-container">
+    <h1 class="afisha-title">Статистика по броням</h1>
+
+    {% if stats %}
+    {% for date_str, info in stats %}
+    <div class="afisha-card">
+        <h2>{{ date_str }}</h2>
+        <div class="days">
+            Всего броней: {{ info.count }}
+        </div>
+
+        <table style="width:100%; margin-top:10px; font-size:14px; border-collapse: collapse;">
+            <thead>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <th style="text-align:left; padding:4px 6px;">Стол</th>
+                    <th style="text-align:left; padding:4px 6px;">Время</th>
+                    <th style="text-align:left; padding:4px 6px;">Имя</th>
+                    <th style="text-align:left; padding:4px 6px;">Телефон</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in info.tables %}
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                    <td style="padding:4px 6px;">{{ r.table_id }}</td>
+                    <td style="padding:4px 6px;">{{ r.time }}</td>
+                    <td style="padding:4px 6px;">{{ r.name }}</td>
+                    <td style="padding:4px 6px;">{{ r.phone }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>Пока нет ни одной брони.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

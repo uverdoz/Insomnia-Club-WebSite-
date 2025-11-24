@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ title if title else "Insomnia" }}</title>
+
+    <!-- Общий стиль сайта -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <!-- Стили конкретной страницы бронирования -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}">
+</head>
+
+<!-- Фоновая дымка -->
+<div class="smoke-layer"></div>
+
+<body>
+
+    <!-- Навигация -->
+    <header class="site-header">
+        <div class="container">
+            <a href="{{ url_for('home') }}" class="logo">INSOMNIA</a>
+
+            <div id="free-counter" class="free-counter">
+                Свободных столов: —
+            </div>
+
+            <nav class="main-nav">
+                <a href="{{ url_for('home') }}">Главная</a>
+                <a href="/afisha" data-text="АФИША">Афиша<div class="glow-line"></div></a>
+                <a href="#">Фоторепорты</a>
+                <a href="{{ url_for('booking_page') }}">Бронирование</a>
+                <a href="#faq">Раздел FAQ</a>
+                <a href="#contacts">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Контент каждой страницы рендерится здесь -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Основной JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+<!-- Основной шрифт -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Для неоновых заголовков -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+</html>

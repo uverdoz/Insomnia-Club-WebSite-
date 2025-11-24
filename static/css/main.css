@@ -1,0 +1,841 @@
+/* main.css — основной общий стиль сайта */
+
+:root {
+    --bg: #0f1414;
+    --card: rgba(255, 255, 255, 0.06);
+    --accent: #ff4db8;
+    --text: #fff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* ===========================
+      HEADER
+=========================== */
+.site-header {
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 99999 !important;
+    padding: 27px 0;
+}
+
+.site-header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+}
+
+.logo {
+    color: #8dff3f;
+    font-weight: 700;
+    letter-spacing: 3px;
+    font-size: 22px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* ===========================
+      INSOMNIA — NEON GLITCH NAVIGATION
+=========================== */
+
+.main-nav a {
+    position: relative;
+    display: inline-block;
+    padding: 8px 18px;
+    margin-left: 22px;
+
+    color: #c9ffb2;
+    text-decoration: none;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+
+    transition:
+        transform .3s cubic-bezier(.25, .8, .25, 1),
+        color .3s,
+        opacity .3s,
+        text-shadow .3s;
+
+    opacity: 0.85;
+    overflow: visible;
+}
+
+/* НЕОНОВАЯ ПОДСВЕТКА */
+.main-nav a:hover {
+    transform: translateY(-4px) scale(1.07);
+    color: #8dff3f;
+    opacity: 1;
+    text-shadow:
+        0 0 6px #8dff3f,
+        0 0 16px #8dff3f,
+        0 0 28px #8dff3f;
+}
+
+/* ГЛИТЧ — дополнительные слои */
+.main-nav a::before,
+.main-nav a::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    color: #8dff3f;
+    pointer-events: none;
+    mix-blend-mode: lighten;
+}
+
+/* отключаем глитч */
+.main-nav a:hover::before,
+.main-nav a:hover::after {
+    opacity: 0 !important;
+    animation: none !important;
+}
+
+/* НЕОНОВАЯ ЛИНИЯ ПОД ТЕКСТОМ */
+.main-nav a .glow-line {
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #8dff3f, transparent);
+    opacity: 0;
+    transform: scaleX(0);
+    transition: .25s ease;
+}
+
+.main-nav a:hover .glow-line {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+/* ГЛИТЧ АНИМАЦИЯ */
+@keyframes glitch {
+    0% {
+        clip-path: inset(0 0 40% 0);
+        transform: translate(0, -2px);
+    }
+
+    20% {
+        clip-path: inset(60% 0 0 0);
+        transform: translate(-3px, 1px);
+    }
+
+    40% {
+        clip-path: inset(10% 0 80% 0);
+        transform: translate(2px, -1px);
+    }
+
+    60% {
+        clip-path: inset(80% 0 5% 0);
+        transform: translate(-1px, 0);
+    }
+
+    100% {
+        clip-path: inset(0 0 40% 0);
+        transform: translate(0, 1px);
+    }
+}
+
+/* ===========================
+      HERO + SLIDER
+=========================== */
+
+.hero {
+    margin: 0;
+    padding: 100;
+    height: 100vh;
+    position: relative;
+    margin-top: -52px;
+    /* картинка уходит под шапку */
+}
+
+main {
+    padding-top: 0 !important;
+    /* чтобы не отталкивался вниз */
+}
+
+.slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s;
+    top: 0;
+    left: 0;
+    display: block;
+}
+
+.slide.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 2;
+}
+
+.hero-text {
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.hero-text h1 {
+    font-size: 90px;
+    margin: 0;
+    letter-spacing: 6px;
+}
+
+.hero-text p {
+    margin-top: 8px;
+    opacity: 0.9;
+}
+
+/* ===========================
+      CONTENT FIX — ЧТОБЫ НЕ ЛЕЗЛО ПОД ШАПКУ
+=========================== */
+
+main {
+    padding-top: 140px !important;
+    /* фикс залезания под header */
+}
+
+
+
+/* ===========================
+      HELPERS
+=========================== */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.about-section {
+    margin-top: 50px;
+    padding: 40px 0;
+    background: rgba(255, 255, 255, 0.03);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.about-section h2 {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.about-section p {
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+/* ===========================
+   БРОНИРОВАНИЕ — НЕ ПЕРЕКРЫВАЕТ HEADER
+=========================== */
+
+.booking-container,
+.floor,
+.table,
+.bar,
+.vip {
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================
+        A F I S H A
+============================ */
+
+.afisha-container {
+    max-width: 1100px;
+    margin: 60px auto 120px;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.afisha-title {
+    font-size: 48px;
+    margin-bottom: 40px;
+    color: #8dff3f;
+    letter-spacing: 4px;
+    text-shadow: 0 0 8px #8dff3f;
+}
+
+/* КАРТОЧКИ */
+.afisha-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 25px 30px;
+    margin: 25px 0;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+/* эффект при наведении */
+.afisha-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: #8dff3f;
+    box-shadow: 0 0 25px #8dff3faa;
+}
+
+/* НЕОНОВАЯ ЛИНИЯ СНИЗУ */
+.afisha-card::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #8dff3f, transparent);
+    opacity: 0.7;
+}
+
+/* Заголовки секций */
+.afisha-card h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: #fff;
+    text-shadow: 0 0 10px #8dff3f;
+}
+
+/* Дни */
+.afisha-card .days {
+    font-size: 18px;
+    color: #8dff3f;
+    margin-bottom: 4px;
+}
+
+/* Время */
+.afisha-card .time {
+    font-size: 20px;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+/* Описание */
+.afisha-card .desc {
+    opacity: 0.85;
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+.afisha-btn-wrap {
+    margin-top: 18px;
+    text-align: right;
+    /* кнопка справа, как у премиум-заведений */
+}
+
+.afisha-btn {
+    display: inline-block;
+    padding: 10px 22px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #8dff3f;
+    border: 2px solid #8dff3f;
+    border-radius: 10px;
+    text-decoration: none;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+/* Hover эффект */
+.afisha-btn:hover {
+    background: #8dff3f;
+    color: #000;
+    box-shadow: 0 0 18px #8dff3f, 0 0 30px #8dff3f;
+    transform: translateY(-3px);
+}
+
+.contacts-section {
+    margin: 100px auto;
+    max-width: 1100px;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.contacts-title {
+    font-size: 48px;
+    margin-bottom: 35px;
+    color: #8dff3f;
+    text-shadow: 0 0 10px #8dff3f;
+    letter-spacing: 3px;
+}
+
+.map-wrapper {
+    width: 100%;
+    height: 420px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 25px rgba(141, 255, 63, 0.3);
+    margin-bottom: 25px;
+}
+
+.map-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.route-btn-box {
+    margin-top: 20px;
+}
+
+.route-btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 10px;
+    background: #8dff3f;
+    color: #0f1414;
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: .25s ease;
+}
+
+.route-btn:hover {
+    transform: translateY(-3px) scale(1.06);
+    box-shadow: 0 0 15px #8dff3f;
+}
+
+.admin-login-container {
+    max-width: 400px;
+    margin: 160px auto;
+    text-align: center;
+}
+
+.admin-login-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #555;
+}
+
+.admin-login-container button {
+    width: 100%;
+    padding: 12px;
+    background: #8dff3f;
+    border-radius: 8px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.admin-table {
+    width: 100%;
+    margin-top: 40px;
+    border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.danger-btn {
+    padding: 8px 14px;
+    background: #ff4d4d;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+}
+
+.admin-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    margin: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #8dff3f;
+    font-size: 17px;
+    text-decoration: none;
+    transition: 0.25s ease;
+    letter-spacing: 1px;
+}
+
+.admin-btn:hover {
+    background: rgba(141, 255, 63, 0.12);
+    box-shadow: 0 0 12px #8dff3f;
+    transform: translateY(-3px);
+}
+
+.stat-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+}
+
+.stat-table th,
+.stat-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+}
+
+.stat-table th {
+    color: #8dff3f;
+    font-size: 18px;
+}
+
+.stat-table tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* =====================
+    AFISHA – NEW STYLE
+===================== */
+
+.afisha-wrapper {
+    max-width: 1050px;
+    margin: 80px auto;
+    padding: 0 20px;
+}
+
+/* Заголовок POSTER */
+.afisha-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 58px;
+    letter-spacing: 6px;
+    text-align: center;
+    margin-bottom: 60px;
+    color: #9dff60;
+    text-shadow:
+        0 0 12px #9dff60,
+        0 0 26px #52ff00,
+        0 0 50px #52ff00;
+}
+
+/* Карточка */
+.afisha-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(157, 255, 96, 0.2);
+    border-radius: 20px;
+    padding: 35px;
+    margin-bottom: 35px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    backdrop-filter: blur(6px);
+    transition: .35s ease;
+}
+
+.afisha-card:hover {
+    transform: translateY(-5px);
+    border-color: #9dff60;
+    box-shadow:
+        0 0 18px #9dff60aa,
+        0 0 35px #52ff00aa;
+}
+
+/* Название мероприятия */
+.afisha-title-small {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #c9ffb2;
+    margin-bottom: 5px;
+    text-shadow: 0 0 10px #9dff60;
+}
+
+/* Дни недели */
+.afisha-days {
+    color: #9dff60;
+    opacity: .9;
+    font-size: 18px;
+    margin-bottom: 3px;
+}
+
+/* Время проведения */
+.afisha-time {
+    color: #fff;
+    opacity: .85;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* Описание */
+.afisha-desc {
+    opacity: .75;
+    line-height: 1.6;
+    max-width: 850px;
+}
+
+/* Кнопка */
+.afisha-btn {
+    align-self: flex-end;
+    margin-top: 15px;
+
+    padding: 10px 24px;
+    border-radius: 12px;
+    border: 2px solid #9dff60;
+    background: transparent;
+    color: #9dff60;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.afisha-btn:hover {
+    background: #9dff60;
+    color: #000;
+    box-shadow: 0 0 20px #9dff60;
+}
+
+/* =====================
+   AFISHA — ADVANCED LOOK
+===================== */
+
+/* Анимация появления карточек */
+.afisha-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp .6s ease forwards;
+}
+
+.afisha-card:nth-child(1) {
+    animation-delay: .1s;
+}
+
+.afisha-card:nth-child(2) {
+    animation-delay: .25s;
+}
+
+.afisha-card:nth-child(3) {
+    animation-delay: .4s;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Неоновая рамка вокруг карточки */
+.afisha-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    pointer-events: none;
+    box-shadow:
+        0 0 15px #9dff6055,
+        inset 0 0 20px #9dff6022;
+    opacity: 0;
+    transition: .45s ease;
+}
+
+.afisha-card:hover::after {
+    opacity: 1;
+}
+
+/* Лазерная линия сверху */
+.afisha-card::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #9dff60, transparent);
+    transition: .45s ease;
+}
+
+.afisha-card:hover::before {
+    width: 100%;
+}
+
+/* ============================
+      FOG / SMOKE BACKGROUND
+============================ */
+
+/* ============================
+      3D AFISHA CARDS
+============================ */
+
+.afisha-card {
+    perspective: 900px;
+    transform-style: preserve-3d;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.afisha-card:hover {
+    transform: translateY(-8px) rotateX(7deg) rotateY(-6deg);
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.6),
+        0 0 25px #9dff60aa;
+}
+
+.afisha-card:hover h2 {
+    text-shadow: 0 0 14px #9dff60;
+}
+
+.afisha-card:hover .days {
+    text-shadow: 0 0 10px #9dff60dd;
+}
+
+/* ===========================
+   GLOBAL PAGE FADE-IN
+=========================== */
+
+body {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: pageFadeIn 0.8s ease forwards;
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.faq-block {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 20px;
+    color: white;
+}
+
+.faq-block h2 {
+    font-size: 36px;
+    margin-bottom: 25px;
+}
+
+.faq-item {
+    margin-bottom: 22px;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.faq-item h3 {
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+.faq-item p {
+    font-size: 16px;
+    opacity: 0.85;
+}
+
+.contacts-block {
+    margin: 60px auto;
+    text-align: center;
+    color: white;
+}
+
+.contact-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    margin: 10px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+    transition: 0.25s;
+}
+
+.call-btn {
+    background: #00d816;
+}
+
+.call-btn:hover {
+    background: #00d816;
+    transform: translateY(-3px);
+}
+
+.tg-btn {
+    background: #0088cc;
+}
+
+.tg-btn:hover {
+    background: #0075b0;
+    transform: translateY(-3px);
+}
+
+.work-time {
+    margin-top: 18px;
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.free-counter {
+    position: absolute;
+    top: 90px;
+    left: 40px;
+
+    padding: 10px 16px;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(141, 255, 63, 0.3);
+    border-radius: 12px;
+
+    color: #8dff3f;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 1px;
+
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 12px rgba(141, 255, 63, 0.2);
+
+    z-index: 9999;
+}
