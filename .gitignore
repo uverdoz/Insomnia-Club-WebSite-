@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+reservations.js
+bookings.js
+*.xlsx
+.DS_Store
